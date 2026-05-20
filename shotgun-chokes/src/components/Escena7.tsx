@@ -38,16 +38,16 @@ export const Escena7: React.FC<{ opacity: number }> = ({ opacity }) => {
         <div className="w-12 h-1 bg-amber-500 rounded-full mb-2" />
 
         <h1 className="text-5xl font-black text-stone-800 tracking-tight leading-snug">
-          Choose your choke based on distance
+          Elige tu choke según la distancia
         </h1>
         
         <p className="text-xl font-medium text-stone-400 max-w-lg mt-2 leading-relaxed">
-          Select Cylinder for close quarter targets, and Full for long-range precision.
+          Usa el Cilíndrico para objetivos cercanos y el Full para máxima precisión a larga distancia.
         </p>
 
         {/* Brand / Footer signature */}
         <div className="mt-12 text-xs font-black tracking-widest text-stone-300 uppercase">
-          Shotgun Ballistics Series
+          Serie de Balística de Escopeta
         </div>
       </div>
     </div>

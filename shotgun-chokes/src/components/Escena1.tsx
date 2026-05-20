@@ -11,7 +11,7 @@ export const Escena1: React.FC<{ opacity: number }> = ({ opacity }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Entrance spring of the shotgun
+  // Entrada elástica de la escopeta
   const shotgunEntrance = spring({
     frame,
     fps,
@@ -20,14 +20,14 @@ export const Escena1: React.FC<{ opacity: number }> = ({ opacity }) => {
 
   const shotgunX = interpolate(shotgunEntrance, [0, 1], [-400, 0]);
 
-  // Disparo animation trigger at frame 25
+  // Animación del disparo en el frame 25
   const shotFrame = frame - 25;
-  const shotProgress = Math.max(0, shotFrame / 20); // 0 to 1 over 20 frames
+  const shotProgress = Math.max(0, shotFrame / 20); // 0 a 1 en 20 frames
 
   const flashScale = interpolate(shotProgress, [0, 0.1, 1], [0, 1.5, 3]);
   const flashOpacity = interpolate(shotProgress, [0, 0.1, 0.8, 1], [0, 1, 0.8, 0]);
 
-  // Text animations
+  // Animaciones del texto
   const textEntrance = spring({
     frame: frame - 15,
     fps,
@@ -41,7 +41,7 @@ export const Escena1: React.FC<{ opacity: number }> = ({ opacity }) => {
       className="absolute inset-0 flex flex-col justify-between items-center py-20 px-12"
       style={{ opacity, backgroundColor: "#F9F9F8" }}
     >
-      {/* Title Text */}
+      {/* Título en Español */}
       <div
         className="text-center mt-10"
         style={{
@@ -50,16 +50,16 @@ export const Escena1: React.FC<{ opacity: number }> = ({ opacity }) => {
         }}
       >
         <h1 className="text-6xl font-black text-stone-800 tracking-tight leading-none">
-          What does a shotgun choke do?
+          ¿Para qué sirve el choke de una escopeta?
         </h1>
         <p className="text-xl font-medium text-stone-500 tracking-wider uppercase mt-4">
-          A Visual Guide
+          Una Guía Visual e Infográfica
         </p>
       </div>
 
-      {/* Shotgun & Flash Visual */}
+      {/* Visual de la Escopeta y el Disparo */}
       <div className="relative w-full max-w-4xl flex items-center justify-center h-64">
-        {/* Flat Gunshot Flash Ring */}
+        {/* Destello del disparo plano (ámbar/naranja) */}
         {shotFrame > 0 && (
           <div
             className="absolute left-[72%] top-[41%] w-32 h-32 rounded-full border-4 border-amber-500 bg-amber-400"
@@ -81,7 +81,7 @@ export const Escena1: React.FC<{ opacity: number }> = ({ opacity }) => {
         </div>
       </div>
 
-      {/* Empty footer for balance */}
+      {/* Espacio para balance visual */}
       <div className="h-10" />
     </div>
   );

@@ -34,10 +34,10 @@ export const Escena6: React.FC<{ opacity: number }> = ({ opacity }) => {
   const rowEntrances = [getRowEntrance(0), getRowEntrance(1), getRowEntrance(2), getRowEntrance(3)];
 
   const rows = [
-    { name: "Cylinder", spread: "Wide", range: "Short (< 20m)", style: "bg-stone-50 text-stone-800" },
-    { name: "Improved Cylinder", spread: "Medium-Wide", range: "Short-Med (20m - 25m)", style: "bg-stone-50 text-stone-800" },
-    { name: "Modified", spread: "Medium", range: "Medium (25m - 35m)", style: "bg-stone-50 text-stone-800" },
-    { name: "Full", spread: "Tight", range: "Long (35m+)", style: "bg-amber-50 text-amber-900 border-l-4 border-l-amber-500" },
+    { name: "Cilíndrico (5★)", spread: "Amplio", range: "Corto (< 20m)", style: "bg-stone-50 text-stone-800" },
+    { name: "Cilíndrico Mejorado (4★)", spread: "Medio-Amplio", range: "Corto-Medio (20m - 25m)", style: "bg-stone-50 text-stone-800" },
+    { name: "Modificado (3★)", spread: "Medio", range: "Medio (25m - 35m)", style: "bg-stone-50 text-stone-800" },
+    { name: "Full / Choque Pleno (1★)", spread: "Concentrado", range: "Largo (35m+)", style: "bg-amber-50 text-amber-900 border-l-4 border-l-amber-500" },
   ];
 
   return (
@@ -54,10 +54,10 @@ export const Escena6: React.FC<{ opacity: number }> = ({ opacity }) => {
         }}
       >
         <h1 className="text-6xl font-black text-stone-800 tracking-tight leading-none">
-          Quick Summary
+          Resumen Rápido
         </h1>
         <p className="text-xl font-medium text-stone-500 mt-3 tracking-wide">
-          A comparative blueprint for quick reference
+          Una guía comparativa de referencia rápida
         </p>
       </div>
 
@@ -66,9 +66,9 @@ export const Escena6: React.FC<{ opacity: number }> = ({ opacity }) => {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-stone-200 text-stone-400 text-sm font-black uppercase tracking-wider">
-              <th className="pb-4 pl-4 w-1/3">CHOKE TYPE</th>
-              <th className="pb-4 w-1/3">PATTERN SPREAD</th>
-              <th className="pb-4 pr-4 w-1/3">EFFECTIVE RANGE</th>
+              <th className="pb-4 pl-4 w-1/3">TIPO DE CHOKE</th>
+              <th className="pb-4 w-1/3">DISPERSIÓN</th>
+              <th className="pb-4 pr-4 w-1/3">ALCANCE EFECTIVO</th>
             </tr>
           </thead>
           <tbody>

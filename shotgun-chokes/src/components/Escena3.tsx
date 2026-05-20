@@ -5,41 +5,43 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { ChokeConstrictionSvg } from "./ShotgunSvg";
+import { PerspectiveBarrelSvg } from "./ShotgunSvg";
 
 export const Escena3: React.FC<{ opacity: number }> = ({ opacity }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const sceneFrame = frame - 240; // Escena 3 starts at frame 240
+  const sceneFrame = frame - 240; // Escena 3 inicia en el frame 240
 
-  // We have 4 phases, each lasting 50 frames (approx 1.6s)
-  // Phase 1: 0 - 50 -> Cylinder (0%)
-  // Phase 2: 50 - 100 -> Improved Cylinder (25%)
-  // Phase 3: 100 - 150 -> Modified (50%)
-  // Phase 4: 150 - 240 -> Full (100%)
-  
+  // 4 fases de 50 frames cada una (aprox 1.6s por choke)
   const activePhase = Math.floor(sceneFrame / 50);
   const constrainedPhase = Math.min(3, Math.max(0, activePhase));
 
   const labels = [
-    { name: "Cylinder", constriction: 0.0, desc: "No constriction. Wide & immediate spread." },
-    { name: "Improved Cylinder", constriction: 0.25, desc: "Slight constriction. Medium-wide spread." },
-    { name: "Modified", constriction: 0.5, desc: "Moderate constriction. Balanced range and density." },
-    { name: "Full", constriction: 1.0, desc: "Maximum constriction. Highly concentrated density at long distance." },
+    { name: "Cilíndrico", constriction: 0.0, desc: "Sin constricción (0★). Dispersión inmediata y patrón amplio." },
+    { name: "Cilíndrico Mejorado", constriction: 0.25, desc: "Constricción mínima (4★). Patrón de dispersión medio-amplio." },
+    { name: "Modificado", constriction: 0.5, desc: "Constricción moderada (3★). Excelente balance entre rango y densidad." },
+    { name: "Full", constriction: 1.0, desc: "Constricción máxima (1★). Alta densidad concentrada a largas distancias." },
   ];
 
-  // Smooth interpolation for constriction size between transitions
-  const currentConstriction = interpolate(
-    sceneFrame,
-    [0, 50, 100, 150],
-    [0.0, 0.25, 0.5, 1.0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
+  // Calculamos el frame relativo dentro de la fase actual (0 a 49)
+  const phaseFrame = sceneFrame % 50;
 
-  // Animation for the text description fade-in
+  // Animación del tubo deslizando (choke insert) entrando en el cañón (0 a 1)
+  // El choke se desliza hacia adentro durante los primeros 18 frames de la fase
+  const slideSpring = spring({
+    frame: phaseFrame,
+    fps,
+    config: { damping: 12, mass: 0.7 },
+  });
+  const chokeSlideProgress = interpolate(slideSpring, [0, 1], [0, 1]);
+
+  // El diámetro del choke interpolado suavemente
+  const currentConstriction = labels[constrainedPhase].constriction;
+
+  // Animación de aparición de textos
   const textSpring = spring({
-    frame: sceneFrame % 50,
+    frame: phaseFrame,
     fps,
     config: { damping: 12 },
   });
@@ -50,28 +52,29 @@ export const Escena3: React.FC<{ opacity: number }> = ({ opacity }) => {
       className="absolute inset-0 flex flex-col justify-between items-center py-20 px-12"
       style={{ opacity, backgroundColor: "#F9F9F8" }}
     >
-      {/* Title Text */}
+      {/* Título en Español */}
       <div className="text-center mt-6">
         <h1 className="text-6xl font-black text-stone-800 tracking-tight leading-none">
-          Types of Chokes
+          Tipos de Chokes
         </h1>
         <p className="text-xl font-medium text-stone-500 mt-3 tracking-wide">
-          Different constrictions for different tactical needs
+          Diferentes constricciones para adaptarse a cada distancia
         </p>
       </div>
 
-      {/* Main Layout (Split screen) */}
+      {/* Grid Central */}
       <div className="w-full max-w-4xl flex items-center justify-around my-auto gap-8">
-        {/* Left Side: Choke Visual */}
-        <div className="flex-1 flex justify-center">
-          <ChokeConstrictionSvg
-            constriction={currentConstriction}
-            label={labels[constrainedPhase].name}
-            style={{ width: "260px", transform: "scale(1.15)" }}
+        
+        {/* LADO IZQUIERDO: Visualización en perspectiva del Cañón y el Choke deslizante */}
+        <div className="flex-1 flex justify-center bg-white border border-stone-100 rounded-3xl p-6 shadow-sm h-80 items-center max-w-md">
+          <PerspectiveBarrelSvg
+            chokeSlideProgress={chokeSlideProgress}
+            constrictionSize={currentConstriction}
+            style={{ width: "350px", height: "260px" }}
           />
         </div>
 
-        {/* Right Side: Choke Info cards */}
+        {/* LADO DERECHO: Tarjetas de información de chokes */}
         <div className="flex-1 flex flex-col gap-4">
           {labels.map((item, idx) => {
             const isActive = idx === constrainedPhase;
@@ -89,7 +92,7 @@ export const Escena3: React.FC<{ opacity: number }> = ({ opacity }) => {
                     {item.name}
                   </span>
                   <span className="text-xs font-black uppercase bg-black/10 px-2.5 py-1 rounded-full">
-                    {(item.constriction * 100).toFixed(0)}% constr.
+                    {idx === 0 ? "Estrella: 5★" : idx === 1 ? "Estrella: 4★" : idx === 2 ? "Estrella: 3★" : "Estrella: 1★"}
                   </span>
                 </div>
                 {isActive && (

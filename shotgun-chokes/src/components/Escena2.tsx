@@ -11,13 +11,13 @@ export const Escena2: React.FC<{ opacity: number }> = ({ opacity }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Scene offset
-  const sceneFrame = frame - 90; // Escena 2 starts at frame 90
+  // Offset de la escena (inicia en frame 90)
+  const sceneFrame = frame - 90;
 
-  // Shot starts at sceneFrame 15
+  // Animación del disparo en el frame 15
   const shotProgress = Math.min(1, Math.max(0, (sceneFrame - 15) / 100));
 
-  // Entrances
+  // Entradas de texto
   const textEntrance = spring({
     frame: sceneFrame,
     fps,
@@ -31,7 +31,7 @@ export const Escena2: React.FC<{ opacity: number }> = ({ opacity }) => {
       className="absolute inset-0 flex flex-col justify-between items-center py-20 px-12"
       style={{ opacity, backgroundColor: "#F9F9F8" }}
     >
-      {/* Title Text */}
+      {/* Título en Español */}
       <div
         className="text-center mt-6"
         style={{
@@ -40,19 +40,19 @@ export const Escena2: React.FC<{ opacity: number }> = ({ opacity }) => {
         }}
       >
         <h1 className="text-6xl font-black text-stone-800 tracking-tight leading-none">
-          Controls Spread
+          Controla la Dispersión
         </h1>
         <p className="text-xl font-medium text-stone-500 mt-3 tracking-wide">
-          Chokes alter the size and density of the shot pattern
+          El choke altera el tamaño y la densidad del plomeo de los perdigones
         </p>
       </div>
 
-      {/* Comparison Layout */}
+      {/* Grid de Comparación */}
       <div className="w-full max-w-4xl flex flex-col gap-6 my-auto">
-        {/* Pattern 1: Wide Spread */}
+        {/* Patrón 1: Dispersión Amplia */}
         <div className="bg-stone-50 border border-stone-100 rounded-3xl p-4 flex items-center h-44 shadow-sm relative">
           <div className="absolute left-6 top-6 bg-stone-200 text-stone-700 text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider z-10">
-            Wide Pattern (Open Choke)
+            Dispersión Amplia (Choke Abierto)
           </div>
           <ChokePattern
             spreadWidth={110}
@@ -62,10 +62,10 @@ export const Escena2: React.FC<{ opacity: number }> = ({ opacity }) => {
           />
         </div>
 
-        {/* Pattern 2: Tight Spread */}
+        {/* Patrón 2: Dispersión Cerrada */}
         <div className="bg-stone-50 border border-stone-100 rounded-3xl p-4 flex items-center h-44 shadow-sm relative">
           <div className="absolute left-6 top-6 bg-amber-500 text-white text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider z-10">
-            Tight Pattern (Constricted Choke)
+            Dispersión Concentrada (Choke Cerrado)
           </div>
           <ChokePattern
             spreadWidth={30}

@@ -43,10 +43,10 @@ export const Escena5: React.FC<{ opacity: number }> = ({ opacity }) => {
         style={{ opacity: textOpacity }}
       >
         <h1 className="text-6xl font-black text-stone-800 tracking-tight leading-none">
-          Effective Distance
+          Distancia Efectiva
         </h1>
         <p className="text-xl font-medium text-stone-500 mt-3 tracking-wide">
-          Chokes maintain pattern density over longer ranges
+          Los chokes mantienen la densidad del plomeo a mayor alcance
         </p>
       </div>
 
@@ -118,14 +118,14 @@ export const Escena5: React.FC<{ opacity: number }> = ({ opacity }) => {
           <g opacity={interpolate(curveProgress, [0.3, 0.8], [0.1, 0.8])}>
             <circle cx="250" cy="85" r="30" fill="#5E6B5C" opacity="0.1" />
             <circle cx="250" cy="85" r="30" stroke="#5E6B5C" strokeWidth="1.5" strokeDasharray="3 3" fill="none" opacity="0.4" />
-            <text x="250" y="125" textAnchor="middle" fontSize="12" fontWeight="black" fill="#5E6B5C" opacity="0.8">CYLINDER SPREAD</text>
+            <text x="250" y="125" textAnchor="middle" fontSize="12" fontWeight="black" fill="#5E6B5C" opacity="0.8">PLOMEO CILÍNDRICO</text>
           </g>
 
           {/* Full pattern holding long */}
           <g opacity={interpolate(curveProgress, [0.6, 1], [0, 0.9])}>
             <circle cx="550" cy="85" r="16" fill="#E28743" opacity="0.2" />
             <circle cx="550" cy="85" r="16" stroke="#E28743" strokeWidth="2" fill="none" opacity="0.8" />
-            <text x="550" y="125" textAnchor="middle" fontSize="12" fontWeight="black" fill="#E28743">FULL DENSITY</text>
+            <text x="550" y="125" textAnchor="middle" fontSize="12" fontWeight="black" fill="#E28743">PLOMEO FULL</text>
           </g>
 
         </svg>
@@ -133,17 +133,17 @@ export const Escena5: React.FC<{ opacity: number }> = ({ opacity }) => {
         {/* Distance Ruler at the bottom */}
         <div className="mt-4 border-t border-stone-200 pt-4 flex justify-between text-sm font-black text-stone-500 tracking-wider relative">
           <div className="absolute top-0 left-0 bg-amber-500 h-[2px]" style={{ width: `${scaleWidth}%` }} />
-          <span>0 METERS</span>
-          <span>15m (Short)</span>
-          <span>30m (Medium)</span>
-          <span>45m (Long)</span>
-          <span>60m (Max)</span>
+          <span>0 METROS</span>
+          <span>15m (Corto)</span>
+          <span>30m (Medio)</span>
+          <span>45m (Largo)</span>
+          <span>60m (Máx)</span>
         </div>
       </div>
 
       {/* Footer Info */}
       <div className="text-center text-sm font-semibold text-stone-500 uppercase tracking-widest bg-stone-100 px-6 py-2.5 rounded-full shadow-sm">
-        Closed chokes keep pellets together at double the distance
+        Los chokes cerrados concentran los perdigones al doble de distancia
       </div>
     </div>
   );
