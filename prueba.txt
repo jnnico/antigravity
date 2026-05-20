@@ -1,0 +1,6 @@
+Hola Juan,
+
+Este es el archivo 'prueba.txt' creado automáticamente por tu asistente Antigravity.
+Confirmamos que estamos trabajando en la rama 'Pruebas' del repositorio 'jnnico/antigravity' y en el directorio correcto de tu equipo local.
+
+¡Todo funciona a la perfección!
